@@ -154,26 +154,38 @@ app.post("/register", function(req, res) {
   // Validate the user isn't alread registered
 
   // try {
-  //   User.register({username: req.body.username}, req.body.password, function(err, user) {
-  //     if (err) {
-  //       console.log(err);
-  //       res.redirect("/register");
-  //     } else {
-  //       passport.authenticate("local")(req, res, function() {
+  //   User.register({username: req.body.username}, req.body.password);
+  //   passport.authenticate("local")(req, res, function() {
   //         res.redirect("/secrets")
-  //       })
-  //     }
-  //   })
+  //       });
   // } catch (e) {
   //   if (e instanceof UserExistsError) {
   //     console.log("whooooops UserExistsError");
+  //     res.redirect("/register");
   //   } else {
-  //     console.log("some error")
+  //     console.log("some error");
+  //     res.redirect("/register");
   //   }
   // }
 
   // If already registered, give option to change password
   // If not registered, create account
+
+  // User.register({username: req.body.username}, req.body.password, function(err, user) {
+  //   if (err) {
+  //     console.log(err.constructor);
+  //     if (err.constructor === err.errorMessages) {
+  //       console.log("User exists!");
+  //       res.redirect("/register");
+  //     } else {
+  //       // console.log(err);
+  //     }
+  //   } else {
+  //     passport.authenticate("local")(req, res, function() {
+  //       res.redirect("/secrets")
+  //     })
+  //   }
+  // })
 
   User.register({username: req.body.username}, req.body.password, function(err, user) {
     if (err) {
