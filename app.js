@@ -22,7 +22,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB");
+const mongoPW = process.env.MONGODB_PW;
+
+mongoose.connect("mongodb+srv://admin:" + mongoPW + "@cluster0.hehsxz5.mongodb.net/userDB");
 
 const secretSchema = new mongoose.Schema ({
   secret: String
@@ -227,6 +229,6 @@ app.get("/logout", function(req, res, next) {
   });
 });
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000.");
-})
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`Server is listening on port ${PORT}...`));
